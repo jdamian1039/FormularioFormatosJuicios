@@ -1,0 +1,36 @@
+<div class="container frame-bucle" [formGroup]="formGroup">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <label class="m-2 col-md-auto col-sm-auto">{{numeroColindancia()}}a linea:    </label>
+                <input id="medida" type="number" name="medida" class="m-2 col-md-3 col-sm-3" formControlName="medida">
+                <!--[value]="medida()" (change)="medida.set(txtMedida.valueAsNumber)" (change)="enviarColindancia()" #txtMedida formControlName="medida" -->
+                <label class="m-2 col-md-3 col-sm-3">mts</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <label class="m-2 col-md-auto col-sm-12">Nombre completo colindante o calle</label>
+                <input id="colindante" type="text" oninput="this.value = this.value.toUpperCase()" name="colindante" class="m-2 col w-100" formControlName="colindante">
+                <!--[value]="colindante()" (change)="colindante.set(txtColindante.value)" (change)="enviarColindancia()" #txtColindante formControlName="colindante" -->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <label class="m-2 col-md-auto">Finado:</label>
+            <input id="finado" type="checkbox" name="finado" value="Si" class="m-2" (change)="toggleMostrar($event)" formControlName="finado">
+        </div>
+    </div>
+    <div class="row" [hidden]="!mostrarCampo">
+        <div class="col-12">
+            <div class="row">
+                <label class="m-2 col-md-auto col-sm-12">Nombre completo colindante actual</label>
+                <input id="nuevoColindante" type="text" oninput="this.value = this.value.toUpperCase()" name="nuevoColindante" class="m-2 col w-100" formControlName="nuevoColindante">
+                <!--[value]="nuevoColindante()" (change)="nuevoColindante.set(txtNuevo.value)" (change)="enviarColindancia()" #txtNuevo formControlName="nuevoColindante" -->
+            </div>
+        </div>
+    </div>
+</div>

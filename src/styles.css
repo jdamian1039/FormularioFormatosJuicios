@@ -1,1 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
+
+button {
+    padding: 8px;
+}
+
+select{
+    border-width: 1px;
+    border-radius: 3px;
+    padding: 3px;
+    height: 2em;
+}
+
+input[type="text"], input[type="number"], input[type="date"], input[type="email"] {
+    border-width: 1px;
+    border-radius: 3px;
+    padding: 3px;
+    padding-left: 1em;
+    height: 2em;
+}
+
+.bg-primary-subtle
+{
+    border-radius: 10px;
+}
+
+.frame-bucle{
+    border-bottom: 1px solid #007bff;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.interfaz-botones {
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.interfaz-botones-h {
+    margin-top: 2em;
+}
+
+.scrolling-element {
+    height: 69vh; /* Ajusta este valor según tus necesidades */
+    overflow-y: auto;
+}

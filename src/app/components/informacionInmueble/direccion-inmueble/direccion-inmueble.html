@@ -1,0 +1,24 @@
+<div class="m-4 p-5" [formGroup]="step6Form">
+    <div>
+        <h2 class="mb-4">Direccion del Inmueble en Juicio</h2>
+        <div class="bg-primary-subtle p-5">
+            <app-controles-direcciones [direccionForm]="direccionGroup"></app-controles-direcciones>
+            <div class="container">
+                <div class="row">
+                    <label for="superficie" class="m-2 col-lg-6 col-md-12 col-sm-12">Superficie aproximada Total del Inmueble</label>
+                    <input id="superficie" type="number" name="nombre" placeholder="Cifra en Metros" class="m-2 col w-100" formControlName="superficie"  >
+                </div>
+                <div class="row">
+                    <label for="superficieLetras" class="m-2 col-lg-12 col-md-12 col-sm-12">Superficie aproximada Escrita en Letras</label>
+                    <input id="superficieLetras" type="text" oninput="this.value = this.value.toUpperCase()" name="superficieLetras" placeholder="Metros" class="m-2 col-lg-6 col-md-6 col-sm-9" formControlName="superficieLetrasMetros"  >
+                    <label for="superficieLetrasMetro" class="m-2 col-lg-4 col-md-4 col-sm-6">Metros</label>
+                </div>
+                <div class="row">
+                    <label for="superficieLetras" class="m-2 col-lg-12 col-md-12 col-sm-12">Superficie aproximada Escrita en Letras</label>
+                    <input id="superficieLetras" type="text" oninput="this.value = this.value.toUpperCase()" name="superficieLetras" placeholder="Centimetros" class="m-2 col-lg-6 col-md-6 col-sm-9" formControlName="superficieLetrasCentimetros"  >
+                    <label for="superficieLetrasMetro" class="m-2 col-lg-4 col-md-4 col-sm-6">Centímetros</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

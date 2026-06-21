@@ -1,0 +1,62 @@
+<div class="m-4 p-5" [formGroup]="step9Form">
+    <div>
+        <h2 class="mb-4">Datos de Compraventa del Inmueble</h2>
+        <div class="bg-primary-subtle p-5">
+            <div class="container">
+                <div class="row">
+                    <label for="fecha-compraventa" class="m-2 col-lg-6 col-md-12 col-sm-12">Fecha de celebración del contrato de compraventa</label>
+                    <input id="fecha-compraventa" type="date" name="fecha-compraventa" class="m-2 col" formControlName="fechaCompraventa">
+                </div>
+                <div class="row">
+                    <label for="fecha-posesion" class="m-2 col-lg-6 col-md-12 col-sm-12">Fecha de toma de posesión del Inmueble</label>
+                    <input id="fecha-posesion" type="date" name="fecha-posesion" class="m-2 col" formControlName="fechaPosesion">
+                </div>
+                <div class="row">
+                    <label for="precio-venta" class="m-2 col-lg-6 col-md-12 col-sm-12">Precio de Venta del Inmueble</label>
+                    <input id="precio-venta" type="number" name="precio-venta" class="m-2 col" formControlName="precio">
+                </div>
+                <div class="row">
+                    <label for="precio-venta-letra" class="m-2 col-lg-12 col-md-12 col-sm-12">Ingrese el Precio del Inmueble Escrito en Letras</label>
+                    <input id="precio-venta-letra" type="text" oninput="this.value = this.value.toUpperCase()" name="precio-venta-letra" class="m-2 col-lg-6 col-md-8 col-sm-8" formControlName="precioLetras">
+                    <label for="precio-venta-letra" class="m-2 col">Pesos</label>
+                    <input id="precio-venta-letra" type="number" name="precio-venta-letra" class="m-2 col-lg-2 col-md-3 col-sm-4" formControlName="centavos">
+                    <label for="precio-venta-letra" class="m-2 col">/100 M. N.</label>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <label for="" class="m-2 col-sm-12">Impuestos pagados que acreditan al actor como propietario del inmueble</label>
+                </div>
+                @if(this.tipoFormulario() === "IV" || this.tipoFormulario() === "IVT") {
+                    <div class="row">
+                        <label for="localidad-domicilio" class="m-2 col-lg-6 col-md-12 col-sm-12">Localidad del Inmueble</label>
+                        <input id="localidad-domicilio" type="text" oninput="this.value = this.value.toUpperCase()" name="localidad" class="m-2 col w-100" formControlName="localidad">
+                    </div>
+                    <div class="row">
+                        <label for="municipio-domicilio" class="m-2 col-lg-6 col-md-12 col-sm-12">Municipio del Inmueble</label>
+                        <input id="municipio-domicilio" type="text" oninput="this.value = this.value.toUpperCase()" name="municipio" class="m-2 col w-100" formControlName="municipio">
+                    </div>
+                }
+            </div>
+            <div [formArrayName]="'impuestos'">
+                @for (item of impuestosArray.controls; track $index) {
+                    <div [formGroupName]="$index">
+                        <app-controles-impuestos [formGroup]="getImpuestoFormGroup($index)" />
+                        <!-- (nombreSignal)="recibirNombreImpuesto($event, $index)" 
+                        (valorSignal)="recibirValorImpuesto($event, $index)" -->
+                    </div>
+                }
+            </div>
+            <div class="container interfaz-botones-h">
+                <div class="row justify-content-md-center justify-content-sm-center">
+                    <div class="col interfaz-botones-h">
+                        <button class="w-100 bg-success" (click)="agregarPersona()">Añadir Impuesto</button>
+                    </div>
+                    <div class="col interfaz-botones-h">
+                        <button class="w-100 bg-danger" (click)="quitarPersona()">Quitar Impuesto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

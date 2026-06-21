@@ -1,0 +1,32 @@
+<div class="container frame-bucle"  [formGroup]="direccionForm">
+    <div class="row">
+        <label for="calle-domicilio-notificacion" class="m-2 col-lg-6 col-md-12 col-sm-12">Calle y Número  - Si no hay numero escriba 'Sin Numero'</label>
+        <input id="calle-domicilio-notificacion" type="text" oninput="this.value = this.value.toUpperCase()" name="calle" placeholder="Calle,Numero" class="m-2 col w-100" formControlName="calle">
+    </div>
+    <div class="row">
+        <label for="barrio-domicilio-notificacion" class="m-2 col-lg-6 col-md-12 col-sm-12">Barrio</label>
+        <input id="barrio-domicilio-notificacion" type="text" oninput="this.value = this.value.toUpperCase()" name="barrio" placeholder="No incluir ''Barrio de''" class="m-2 col w-100" formControlName="barrio">
+    </div>
+    <div class="row">
+        <label for="localidad-domicilio-notificacion" class="m-2 col-lg-6 col-md-12 col-sm-12">Localidad</label>
+        <input id="localidad-domicilio-notificacion" type="text" oninput="this.value = this.value.toUpperCase()" name="localidad" class="m-2 col w-100" formControlName="localidad">
+    </div>
+    <div class="row">
+        <label for="municipio-domicilio-notificacion" class="m-2 col-lg-6 col-md-12 col-sm-12">Municipio</label>
+        <input id="municipio-domicilio-notificacion" type="text" oninput="this.value = this.value.toUpperCase()" name="municipio" class="m-2 col w-100" formControlName="municipio">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <label for="distrito-domicilio-notificacion" class="">¿La direccion refiere al municipio como distrito?</label>
+            <input id="distrito-domicilio-notificacion" type="checkbox" name="distrito" value="Si" class="m-2" formControlName="distrito">
+        </div>
+    </div>
+    <div class="row">
+        <label for="estado-domicilio-notificacion" class="m-2 col-lg-6 col-md-12 col-sm-12">Estado</label>
+        <select id="estado-domicilio-notificacion" class="m-2 col w-100" [value]="this.estadosResponse()" formControlName="estado"
+         #txtEstado>
+            <option value="" selected >Selecciona una opción</option>
+            @for (item of this.estadosResponse(); track item.id) {
+                <option value="{{item.nombreEstado}}">{{item.nombreEstado}}</option>
+            }
+        </select>
+    </div>
+</div>

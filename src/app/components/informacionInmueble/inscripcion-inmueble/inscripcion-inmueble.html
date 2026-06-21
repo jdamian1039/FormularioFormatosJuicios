@@ -1,0 +1,43 @@
+<div class="m-4 p-5" [formGroup]="step8Form">
+    <div>
+        <h2 class="mb-4">Inscripción al Registro Patronal del Inmueble</h2>
+        <div class="bg-primary-subtle p-5 container">
+            <div class="row">
+                <label for="oficina-reg" class="m-2 col-lg-6 col-md-12 col-sm-12">Oficina Registral de Inscripción</label>
+                <select name="titulo" id="oficina-reg" class="m-2 col w-100" [value]="this.oficinasRegResponse()" formControlName="oficina">
+                    <option value="" selected >Selecciona una opción</option>
+                    @for (item of this.oficinasRegResponse(); track item.id) {
+                        <option value="{{item.valorCombo}}">{{item.nombreOficina}}</option>
+                    }
+                </select>
+            </div>
+            <div class="row">
+                <label for="fecha-inscripcion" class="m-2 col-lg-6 col-md-12 col-sm-12">Fecha de Inscripción</label>
+                <input id="fecha-inscripcion" type="date" name="fecha-inscripcion" class="m-2 col" formControlName="fechaInscripcion">
+            </div>
+            <div class="row">
+                <label for="folio-electronico" class="m-2 col-lg-6 col-md-12 col-sm-12">Folio Electrónico Real</label>
+                <input id="folio-electronico" type="text" oninput="this.value = this.value.toUpperCase()" name="folio-electronico" class="m-2 col" formControlName="folioElectronico">
+            </div>
+            <div class="row">
+                <label for="titular" class="m-2 col-lg-6 col-md-12 col-sm-12">Codemandado propietario del Inmueble en el IFR del Estado de México</label>
+                <input type="text" name="titular" oninput="this.value = this.value.toUpperCase()" id="titular" class="m-2 col" formControlName="codemandadoDominio" placeholder="Nombre(s) y Apellidos del Codemandado">
+            </div>
+            @if (this.idDocumento() >= 18 && this.idDocumento() <= 27) 
+            {
+                <div class="row">
+                    <label for="titular" class="m-2 col-lg-6 col-md-12 col-sm-12">Codemandado causante de la operacion traslativa de dominio</label>
+                    <input type="text" name="titular" oninput="this.value = this.value.toUpperCase()" id="titular" class="m-2 col" formControlName="codemandadoCausante" placeholder="Nombre(s) y Apellidos del Codemandado">
+                </div>
+            }
+            <div class="row">
+                <label for="oficina-reg" class="m-2 col-lg-6 col-md-12 col-sm-12">Tildación de la inscripcion del dominio del inmueble</label>
+                <select name="titulo" id="oficina-reg" class="m-2 col w-100" formControlName="tildacion">
+                    <option value="" selected >Selecciona una opción</option>
+                    <option value="TOTAL">Total</option>
+                    <option value="PARCIAL">Parcial</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

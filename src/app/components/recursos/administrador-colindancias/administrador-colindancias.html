@@ -1,0 +1,21 @@
+<div (change)="enviarColindancia()" [formGroup]="colindanciaGroup" >
+    <div [formArrayName]="'colindancias'">
+        @for (item of colindancia.controls; track $index) {
+            <div [formGroupName]="$index">
+                <app-controles-colindancias [numeroColindancia]="$index + 1" 
+                [formGroup]="getColindanciaFormGroup($index)" />
+            </div>
+        }
+    </div>
+    <div class="container interfaz-botones-h">
+        <div class="row justify-content-md-center justify-content-sm-center">
+            <div class="col interfaz-botones-h">
+                <button class="w-100 bg-success" (click)="agregarColindancia()">Añadir Persona</button>
+            </div>
+            <div class="col interfaz-botones-h">
+                <button class="w-100 bg-danger" (click)="quitarColindancia()">Quitar Persona</button>
+            </div>
+        </div>
+    </div>
+</div>
+

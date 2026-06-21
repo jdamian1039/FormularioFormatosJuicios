@@ -1,0 +1,16 @@
+<div class="container text-center mt-5">
+  <h2>¡Documento Procesado con Éxito! 🎉</h2>
+  <p class="text-muted">El archivo ha sido generado y guardado de forma segura.</p>
+
+  <hr>
+
+  <div class="my-4">
+    <a [href]="oneDriveUrl()" target="_blank" class="btn btn-outline-success btn-lg me-3">
+      📁 Abrir en OneDrive
+    </a>
+
+    <button (click)="descargarArchivoDesdeNavegador()" class="btn btn-primary btn-lg">
+      ⬇️ Descargar en este Equipo
+    </button>
+  </div>
+</div>

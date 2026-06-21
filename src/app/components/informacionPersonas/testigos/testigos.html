@@ -1,0 +1,57 @@
+<div class="m-4 p-5" [formGroup]="step10Form">
+    <h2 class="mb-4">Datos Testimoniales</h2>
+    @if(this.idDocumento() === 21)
+    {
+        <h3 class="mb-4">Confesional</h3>
+        <div class="bg-primary-subtle p-5">
+            <div class="container">
+                <div class="row">
+                    <label for="fecha-allanamiento" class="m-2 col-lg-6 col-md-12 col-sm-12">Fecha de allanamiento</label>
+                    <input id="fecha-allanamiento" type="date" name="fecha-allanamiento" class="m-2 col" formControlName="fechaAllanamiento">
+                </div>
+                <!--
+                <div class="row">
+                    <label for="lugar-confesional" class="m-2 col-lg-6 col-md-12 col-sm-12">Codemandado</label>
+                    <input id="lugar-confesional" placeholder="Nombre(s) Paterno Materno" type="text" oninput="this.value = this.value.toUpperCase()" name="lugar-confesional" class="m-2 col w-100" formControlName="codemandado">
+                </div>
+                <div class="row">
+                    <label for="lugar-confesional" class="m-2 col-lg-6 col-md-12 col-sm-12">Codemandado</label>
+                    <input id="lugar-confesional" placeholder="Nombre(s) Paterno Materno" type="text" oninput="this.value = this.value.toUpperCase()" name="lugar-confesional" class="m-2 col w-100" formControlName="lugarConfesional">
+                </div>
+                -->
+            </div>
+        </div>
+    }
+    <div class="m-5"></div>
+    <h3 class="mb-4">Testigos</h3>
+    <div class="bg-primary-subtle p-5">
+        <div [formArrayName]="'testigos'">
+            @for (item of testigos.controls; track $index) {
+                <h4 class="mt-4 m-2 text-nowrap">Nombre Testigo {{ $index + 1 }}</h4>
+                <div [formGroupName]="$index">
+                    <app-controles-personas 
+                        [formGroup]="getTestigosFormGroup($index)"/>
+                </div>
+            }
+        </div>
+        <div [formArrayName]="'direcciones'">
+            @for (item of direcciones.controls; track $index) {
+                <h4 class="mt-4 m-2 text-nowrap">Domicilio del Testigo {{ $index + 1 }}</h4>
+                <div [formGroupName]="$index">
+                    <app-controles-direcciones 
+                        [direccionForm]="getDireccionesFormGroup($index)"/>
+                </div>
+            }
+        </div>
+        <div class="container interfaz-botones-h">
+            <div class="row justify-content-md-center justify-content-sm-center">
+                <div class="col interfaz-botones-h">
+                    <button class="w-100 bg-success" (click)="agregarDatosTestigo()">Añadir Testigo</button>
+                </div>
+                <div class="col interfaz-botones-h">
+                    <button class="w-100 bg-danger" (click)="quitarDatosTestigo()">Quitar Testigo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+<form [formGroup]="mainForm" action="" >
+    @if (actualStep === 1) {
+        <div class="mt-4 ml-4 mr-4 pt-2 pl-2 pr-2 scrolling-element">
+            <div class="p-5">
+                <h2 class="mb-4">Antes de empezar</h2>
+                <div class="bg-primary-subtle p-5" formGroupName="step1">
+                    <p>Por favor indique el documento que desea realizar</p>
+                    <div class="container" >
+                        <div class="row">
+                            <label for="tipo-juicio" class="m-2 col-lg-6 col-md-12 col-sm-12">Seleccione el tipo de Juicio a realizar:</label>
+                            <select [value]="this.juiciosResponse()" name="juicio" id="tipo-juicio" class="m-2 col w-100" 
+                            (change)="enviarId(this.juiciosResponse()[txtJuicio.selectedIndex -1])" #txtJuicio 
+                            formControlName="juicio">
+                                <option value="" selected>Selecciona una opción</option>
+                                @for (juicio of juiciosResponse(); track $index) {
+                                    <option [value]="juicio.valorCombo">{{juicio.nombreJuicio}}</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <label for="tipo-documento" class="m-2 col-lg-6 col-md-12 col-sm-12">Seleccione el formato a realizar:</label>
+                            <select [value]="this.documentosResponse()" name="documento" id="tipo-documento" class="m-2 col w-100" 
+                            (change)="seleccionarDocumento(this.documentosResponse()[txtDoc.selectedIndex -1])" #txtDoc
+                            formControlName="documento">
+                                <option value="" selected>Selecciona una opción</option>
+                                @for (item of this.documentosResponse(); track $index) {
+                                    <option [value]="item.rutaTemplate">{{item.nombreDocumento}}</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <label for="nombre-usuario" class="m-2 col-lg-6 col-md-12 col-sm-12">Ingrese el Numero de Expediente Interno del Caso:</label>
+                            <input id="expediente-interno" type="text" name="expedienteInterno" class="m-2 col w-100" formControlName="expedienteInterno">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @if (actualStep === 2 ) {
+        <div class="mt-3 ml-3 mr-3 pt-2 pl-2 pr-2 scrolling-element">
+            <app-informacion-general-juicios 
+            [nombreDocumento]="this.nombreDocumento()" 
+            [idDocumento]="this.idDocumento()" 
+            [parentForm]="mainForm"  />
+        </div>
+    }
+    @if (actualStep === 3 ) {
+        <div class="mt-3 ml-3 mr-3 pt-2 pl-2 pr-2 scrolling-element">
+            <app-actores [step3Form]="step3" />
+        </div>
+    }
+    @if (actualStep ===4 ) {
+        <div class="mt-3 ml-3 mr-3 pt-2 pl-2 pr-2 scrolling-element">
+            <app-demandados [step4Form]="step4" [idDocumento]="this.idDocumento()" />
+        </div>
+    }
+    @if (actualStep === 5 ) {
+        
+        <div class="mt-3 ml-3 mr-3 pt-2 pl-2 pr-2 scrolling-element">
+            <app-informacion-abogado [step5Form]="step5" [idDocumento]="this.idDocumento()" />
+        </div>
+    }
+    @if (this.documentoSelected().clave.includes('D')) {
+        @if (actualStep === 5 + (this.documentoSelected().clave.indexOf('D') + 1) ) {
+            <div class="mt-3 ml-3 mr-3 pt-2 pl-2 pr-2 scrolling-element">
+                <app-direccion-inmueble [step6Form]="step6" />
+            </div>
+        }
+    }
+    @if (this.documentoSelected().clave.includes('C')) {
+        @if (actualStep === 5 +  (this.documentoSelected().clave.indexOf('C') + 1) ) {
+            <div class="mt-3 ml-3 mr-3 pt-2 pl-2 pr-2 scrolling-element">
+                <app-colindancia-inmueble [step7Form]="step7"  />
+            </div>
+        }
+    }
+    @if (this.documentoSelected().clave.includes('I')) {
+        @if (actualStep === 5 +  (this.documentoSelected().clave.indexOf('I') + 1) ) {
+            <div class="mt-3 ml-3 mr-3 pt-2 pl-2 pr-2 scrolling-element">
+                <app-inscripcion-inmueble [step8Form]="step8" [idDocumento]="this.idDocumento()" />
+            </div>
+        }
+    }
+    @if (this.documentoSelected().clave.includes('V')) {
+        @if (actualStep === 5 +  (this.documentoSelected().clave.indexOf('V') + 1) ) {
+            <div class="mt-3 ml-3 mr-3 pt-2 pl-2 pr-2 scrolling-element">
+                <app-informacion-compraventa-inmueble 
+                [step9Form]="step9" [tipoFormulario]="this.documentoSelected().clave"  />
+            </div>
+        }
+    }
+    @if (this.documentoSelected().clave.includes('T')) {
+        @if (actualStep === 5 +  (this.documentoSelected().clave.indexOf('T') + 1) ) {
+            <div class="mt-3 ml-3 mr-3 pt-2 pl-2 pr-2 scrolling-element">
+                <app-testigos [step10Form]="step10" [idDocumento]="this.idDocumento()" />
+            </div>
+        }
+    }
+    <!-- 
+        <div>{{mainForm.value |json }}</div>
+    -->
+    @if (datosFaltantes) {
+        <div class="container">
+            <div class="row">
+                <div class="col" style="color: red;">
+                    <p>Todos los campos obligatorios deben ser llenados, por favor valide su información.</p>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="container interfaz-botones-h">
+        <div class="row">   
+            @if (actualStep > 1) 
+            {
+                <div class="col-md-3 col-sm-12">
+                    <button class="w-100" (click)="previousStep()"  id="botonRegreso">Atrás</button>
+                </div>
+            } 
+            <div class="col-md-3 col-sm-12">
+                <button class="w-100" (click)="nextStep()" id="botonEnvio">Continuar</button>
+            </div>
+            
+        </div>
+    </div>
+</form>

@@ -1,0 +1,36 @@
+<div class="m-4 p-5" [formGroup]="step4Form">
+    <h2 class="mb-4">Datos sobre la parte demandada</h2>
+    <div class="bg-primary-subtle p-5">
+        <div [formArrayName]="'demandados'">
+            @for (item of demandados.controls; track $index) {
+                <div [formGroupName]="$index">
+                    <app-controles-personas 
+                        [formGroup]="getDemandadoFormGroup($index)"
+                        (nombreControl)="recibirNombrePersona($event, $index)"
+                        (apellidoPaternoControl)="recibirPaternoPersona($event, $index)"
+                        (apellidoMaternoControl)="recibirMaternoPersona($event, $index)"
+                        (sexoControl)="recibirSexoPersona($event, $index)"
+                        >
+                    </app-controles-personas>
+                </div>
+            }
+        </div>  
+        @if (this.idDocumento() !== 22) {
+
+            <div class="container interfaz-botones-h">
+                <div class="row justify-content-md-center justify-content-sm-center">
+                    <div class="col interfaz-botones-h">
+                        <button class="w-100 bg-success" (click)="agregarPersona()">Añadir Persona</button>
+                    </div>
+                    <div class="col interfaz-botones-h">
+                        <button class="w-100 bg-danger" (click)="quitarPersona()">Quitar Persona</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="mt-5">Dirección a la cual se recibirá notificación para la parte demandada</p>
+                <app-controles-direcciones [direccionForm]="direccionGroup"></app-controles-direcciones>
+            </div>
+        }
+    </div>
+</div>

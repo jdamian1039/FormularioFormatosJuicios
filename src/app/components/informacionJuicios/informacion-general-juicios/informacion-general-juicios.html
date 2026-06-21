@@ -1,0 +1,34 @@
+<div class="m-3 p-5" [formGroup]="step2Form">
+    <h2 class="mb-4">Formulario para llenado de {{ this.nombreDocumento() }}</h2>
+    <div class="bg-primary-subtle p-5 container">
+        @if (this.idDocumento() !== 1 && this.idDocumento() !== 9 && this.idDocumento() !== 18) {
+            <div class="row">
+                <label for="folio-expediente" class="m-2 col-lg-6 col-md-12 col-sm-12">Ingrese el número de expediente</label>
+                <input id="folio-expediente" type="text" oninput="this.value = this.value.toUpperCase()" name="expediente" placeholder="XXXX/XXXX" maxlength="9" class="m-2 col w-100"
+                formControlName="expediente" >
+            </div>
+        }
+        @if (this.idDocumento() === 19) {
+            <div class="row">
+                <label for="fecha-replica" class="m-2 col-lg-6 col-md-12 col-sm-12">Ingrese la fecha de replica por auto</label>
+                <input type="date" name="fecha-replica" id="fecha-replica" class="m-2 col w-100" formControlName="fechaReplica">
+            </div>
+        }
+        <div class="row">
+            <label for="distrito-judicial" class="m-2 col-lg-6 col-md-12 col-sm-12">Seleccione el Distrito Judicial sobre el que se operará</label>
+            <select [value]="this.distritoResponse()" name="juicio" id="distrito-judicial" class="m-2 col w-100"
+            (change)="setDistritoIndex(this.distritoResponse()[txtDistr.selectedIndex -1])" #txtDistr
+            formControlName="distrito" >
+                <option value="" selected >Selecciona una opción</option>
+                @for (item of this.distritoResponse(); track item.id) {
+                    <option value="{{item.nombreDistrito}}">{{item.nombreDistrito}}</option>
+                }
+            </select>
+        </div>
+        <div class="row">
+            <label for="email" class="m-2 col-lg-6 col-md-12 col-sm-12">Correo institucional para envio de notificaciónes de la parte actora/demandada</label>
+            <input type="email" name="email" id="email" class="m-2 col w-100" formControlName="correo">
+        </div>
+    </div>
+</div>
+

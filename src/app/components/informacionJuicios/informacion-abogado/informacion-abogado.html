@@ -1,0 +1,26 @@
+<div class="m-4 p-5" [formGroup]="step5Form">
+    <h2 class="mb-4">Datos sobre el abogado patrono y asesores legales</h2>
+    <div class="bg-primary-subtle p-5">
+        <div [formArrayName]="'abogados'">
+            @for (item of abogado.controls; track $index) {
+                <div [formGroupName]="$index">
+                    <app-controles-abogado 
+                    [formGroup]="getAbogadosFormGroup($index)"
+                    />
+                </div>
+            }
+        </div>
+        @if(this.idDocumento() === 18 || this.idDocumento() === 19 || this.idDocumento() === 9 || this.idDocumento() === 12) {
+            <div class="container interfaz-botones-h">
+                <div class="row justify-content-md-center justify-content-sm-center">
+                    <div class="col interfaz-botones-h">
+                        <button class="w-100 bg-success" (click)="agregarPersona()">Añadir Abogado</button>
+                    </div>
+                    <div class="col interfaz-botones-h">
+                        <button class="w-100 bg-danger" (click)="quitarPersona()">Quitar Abogado</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

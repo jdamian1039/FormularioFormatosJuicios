@@ -1,0 +1,32 @@
+<div class="container frame-bucle" [formGroup]="formGroup">
+    <div class="row">
+        <label for="titulo" class = "m-2 text-nowrap col-lg-6 col-md-12 col-sm-12">Título del representante:</label>
+        <select name="titulo" id="titulo" class = "m-2 col w-100"  formControlName="titulo" >
+        <!-- [value]="this.tituloAbogado()" (change)="this.tituloAbogado.set(txtTitulo.options[txtTitulo.selectedIndex].textContent)" 
+        (change)="enviarInformacionAbogado()" #txtTitulo -->
+            <option value="" selected >Selecciona una opción</option>
+            <option value="licenciado">Licenciado en Derecho</option>
+            <option value="pasante">Pasante en Derecho</option>
+        </select>
+        <label for="nombre-abogado" class = "m-2 text-nowrap col-lg-6 col-md-12 col-sm-12">Nombre(s)</label>
+        <input id="nombre-abogado" type="text" oninput="this.value = this.value.toUpperCase()" name="nombre" class = "m-2 col w-100"  formControlName="nombre">
+        <!--[value]="this.nombreAbogado()" (change)="this.nombreAbogado.set(txtNombre.value)" (change)="enviarInformacionAbogado()" #txtNombre-->
+        <label for="apellido-paterno-abogado" class = "m-2 text-nowrap col-lg-6 col-md-12 col-sm-12">Apellido Paterno</label>
+        <input id="apellido-paterno-abogado" type="text" oninput="this.value = this.value.toUpperCase()" name="apellido-paterno" class = "m-2 col w-100" formControlName="paterno" >
+        <!--[value]="this.aPaternoAbogado()" (change)="this.aPaternoAbogado.set(txtPaterno.value)" (change)="enviarInformacionAbogado()" #txtPaterno -->
+        <label for="apellido-materno-abogado" class = "m-2 text-nowrap col-lg-6 col-md-12 col-sm-12">Apellido Materno</label>
+        <input id="apellido-materno-abogado" type="text" oninput="this.value = this.value.toUpperCase()" name="apellido-materno" class = "m-2 col w-100" formControlName="materno" >
+        <!--[value]="this.aMaternoAbogado()" (change)="this.aMaternoAbogado.set(txtMaterno.value)" (change)="enviarInformacionAbogado()" #txtMaterno -->
+        <label for="cedula-abogado" class = "m-2 text-nowrap col-lg-6 col-md-12 col-sm-12">Cedula Profesional</label>
+        <input id="cedula-abogado" type="text" oninput="this.value = this.value.toUpperCase()" name="cedula" class = "m-2 col w-100" formControlName="cedula" >
+        <!--[value]="this.cedula()" (change)="this.cedula.set(txtCedula.value)" (change)="enviarInformacionAbogado()" #txtCedula -->
+    </div>
+    <div class="row">
+        <label for="sexo" class="m-2 text-nowrap col col-lg-6 col-md-12 col-sm-12">Sexo</label>
+        <select name="sexo" id="sexo" class="m-2 col w-100" formControlName="sexo" >
+            <option value="">Seleccione opción</option>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+        </select>
+    </div>
+</div>

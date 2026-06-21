@@ -1,0 +1,26 @@
+<div class="container frame-bucle" [formGroup]="formGroup"> 
+    <div class="row row-col-4">
+        <label for="nombre" class="m-2 text-nowrap col-lg-6 col-md-12 col-sm-12">Nombre(s)</label>
+        <input id="nombre" type="text" oninput="this.value = this.value.toUpperCase()" name="nombre" class=" m-2  col w-100" formControlName="nombre" (change)="sendData()" >
+        <!--[value]="nombre()" (change)="nombre.set(txtNombre.value)" (change)="enviarNombrePersona()" #txtNombre]-->
+        <label for="apellido-paterno" class="m-2 text-nowrap col-lg-6 col-md-12 col-sm-12">Apellido Paterno</label>
+        <input id="apellido-paterno" type="text" oninput="this.value = this.value.toUpperCase()" name="apellido-paterno" class="m-2  col w-100" formControlName="paterno" (change)="sendData()" >
+        <!--[value]="apellidoPaterno()" (change)="apellidoPaterno.set(txtPaterno.value)" (change)="enviarNombrePersona()" #txtPaterno]-->
+        <label for="apellido-materno" class="m-2 text-nowrap col-lg-6 col-md-12 col-sm-12">Apellido Materno</label>
+        <input id="apellido-materno" type="text" oninput="this.value = this.value.toUpperCase()" name="apellido-materno" class="m-2  col w-100" formControlName="materno" (change)="sendData()" >
+        <!--[value]="apellidoMaterno()" (change)="apellidoMaterno.set(txtMaterno.value)" (change)="enviarNombrePersona()" #txtMaterno -->
+        
+    </div>
+    <div class="row">
+        <label for="sexo" class="m-2 text-nowrap col col-lg-6 col-md-12 col-sm-12">Sexo</label>
+        <select name="sexo" id="sexo" class="m-2 col w-100" formControlName="sexo" (change)="sendData()" >
+            <option value="">Seleccione opción</option>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+        </select>
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <label for="casado" class="">¿La persona es casada?</label>
+            <input id="casado" type="checkbox" name="casado" value="Si" class="m-2" formControlName="casado">
+        </div>
+    </div>
+</div>

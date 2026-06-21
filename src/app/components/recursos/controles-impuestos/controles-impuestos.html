@@ -1,0 +1,11 @@
+<div class="container frame-bucle" [formGroup]="formGroup">
+    <div class="row">
+        <label for="titulo" class = "m-2 col-lg-6 col-md-12 col-sm-12">Impuesto:</label>
+        <select name="titulo" id="titulo" class = "m-2 col w-100" [value]="nombreImpuesto()" [value]="valorImpuesto()"
+            (change)="nombreImpuesto.set(txtImp.options[txtImp.selectedIndex].textContent)" 
+            (change)="valorImpuesto.set(txtImp.value)" (change)="enviarImpuesto()" #txtImp formControlName="impuesto">    
+            <option value="" selected disabled>Selecciona una opción</option>
+            <option value="Impuesto Predial">Impuesto Predial</option>
+            <option value="Impuesto de Agua">Impuesto de Agua</option>
+        </select>
+</div>
