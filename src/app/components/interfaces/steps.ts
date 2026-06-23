@@ -10,8 +10,7 @@ export interface Step1 {
 export interface Step2 {
   expediente : string,
   fechaReplica: string,
-  distrito : string,
-  correo : string
+  distrito : string
 }
 
 export interface Step3 {

@@ -40,8 +40,7 @@ export class Inicio {
       {
         expediente : new FormControl(''),
         fechaReplica: new FormControl(''),
-        distrito: new FormControl('', Validators.required),
-        correo: new FormControl('', Validators.required)
+        distrito: new FormControl('', Validators.required)
       }
     ),
     step3: new FormGroup(
@@ -87,7 +86,7 @@ export class Inicio {
             paterno: new FormControl('', Validators.required),
             materno: new FormControl('', Validators.required),
             sexo: new FormControl('', Validators.required),
-            cedula: new FormControl('', Validators.required),
+            cedula: new FormControl(''),
           })
         ])
       }
