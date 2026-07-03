@@ -14,16 +14,22 @@ export class ControlesColindancias {
   public medida = signal<number>(0.0)
   public colindante = signal<string>('')
   public nuevoColindante = signal<string>('')
-  mostrarCampo : boolean = false
+  mostrarCampoColindante : boolean = false
+  mostrarCamposDomicilio : boolean = false
 
   numeroColindancia = input.required<number>()
   medidaSignal = output<number>()
   colindanteSignal = output<string>()
   nuevoColindanteSignal = output<string>()
 
-  toggleMostrar(event: any) {
-    this.mostrarCampo = event.target.checked;
+  toggleMostrarNuevoColindante(event: any) {
+    this.mostrarCampoColindante = event.target.checked;
   }
+
+  toggleEsDomicilio(event: any) {
+    this.mostrarCamposDomicilio = event.target.checked;
+  }
+
 
   enviarColindancia(): void {
     this.medidaSignal.emit(this.medida())

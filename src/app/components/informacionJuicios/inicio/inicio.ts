@@ -19,7 +19,7 @@ import { FormField } from "@angular/forms/signals";
 @Component({
   selector: 'app-inicio',
   imports: [InformacionGeneralJuicios, Actores, Demandados, InformacionAbogado, DireccionInmueble, Testigos,
-    ColindanciaInmueble, InscripcionInmueble, InformacionCompraventaInmueble, ReactiveFormsModule, JsonPipe, FormField],
+    ColindanciaInmueble, InscripcionInmueble, InformacionCompraventaInmueble, ReactiveFormsModule, JsonPipe],
   templateUrl: './inicio.html',
   styleUrl: './inicio.css',
 })
@@ -40,7 +40,8 @@ export class Inicio {
       {
         expediente : new FormControl(''),
         fechaReplica: new FormControl(''),
-        distrito: new FormControl('', Validators.required)
+        distrito: new FormControl('', Validators.required),
+        fechaAudiencia: new FormControl('')
       }
     ),
     step3: new FormGroup(
@@ -113,7 +114,9 @@ export class Inicio {
             new FormGroup({
               medida: new FormControl(0, Validators.required),
               colindante: new FormControl('', Validators.required),
+              esDomicilio: new FormControl(false, Validators.required),
               finado: new FormControl(false),
+              primeraLineaDomicilio: new FormControl(''),
               nuevoColindante: new FormControl(''),
             })
           ])
@@ -123,6 +126,8 @@ export class Inicio {
             new FormGroup({
               medida: new FormControl(0, Validators.required),
               colindante: new FormControl('', Validators.required),
+              esDomicilio: new FormControl(false, Validators.required),
+              primeraLineaDomicilio: new FormControl(''),
               finado: new FormControl(false),
               nuevoColindante: new FormControl(''),
             })
@@ -133,6 +138,8 @@ export class Inicio {
             new FormGroup({
               medida: new FormControl(0, Validators.required),
               colindante: new FormControl('', Validators.required),
+              esDomicilio: new FormControl(false, Validators.required),
+              primeraLineaDomicilio: new FormControl(''),
               finado: new FormControl(false),
               nuevoColindante: new FormControl(''),
             })
@@ -143,6 +150,8 @@ export class Inicio {
             new FormGroup({
               medida: new FormControl(0, Validators.required),
               colindante: new FormControl('', Validators.required),
+              esDomicilio: new FormControl(false, Validators.required),
+              primeraLineaDomicilio: new FormControl(''),
               finado: new FormControl(false),
               nuevoColindante: new FormControl(''),
             })
@@ -167,8 +176,16 @@ export class Inicio {
         precio: new FormControl(0, Validators.required),
         precioLetras: new FormControl('', Validators.required),
         centavos: new FormControl(0),
+        comprador : new FormGroup({
+          nombre : new FormControl(''),
+          paterno: new FormControl(''),
+          materno: new FormControl(''),
+          sexo: new FormControl(''),
+          casado: new FormControl(false)
+        }),
         localidad: new FormControl(''),
         municipio: new FormControl(''),
+        ejercicioFiscal: new FormControl(''),
         impuestos: new FormArray([
           new FormGroup({
             impuesto: new FormControl('', Validators.required)
@@ -190,12 +207,17 @@ export class Inicio {
         ]),
         direcciones: new FormArray([
           new FormGroup({
-            calle: new FormControl('', Validators.required),
+            calle: new FormControl(''),
             barrio: new FormControl(''),
             localidad: new FormControl(''),
-            municipio: new FormControl('', Validators.required),
+            municipio: new FormControl(''),
             distrito: new FormControl(false),
-            estado: new FormControl('', Validators.required),
+            estado: new FormControl(''),
+          })
+        ]),
+        relaciones: new FormArray([
+          new FormGroup({
+            tiempoConocimiento: new FormControl(0)
           })
         ]) 
       }
@@ -218,18 +240,20 @@ export class Inicio {
   get step10() { return this.mainForm.get('step10') as FormGroup; }
 
   nextStep(){
-    //if(this.idJuicio() != 0 && this.nombreDocumento() != ''){
-    //  this.actualStep +=1
-    //}
-    //const botonEnvio = document.getElementById('botonEnvio');
-    if((this.documentoSelected().clave.length) + 5 === this.actualStep ){
-      if (!this.mainForm.valid) { // Marca todos los campos como tocados para mostrar los errores
-        this.datosFaltantes = true;
-      }
-      else{
-        this.datosFaltantes = false;
-        this.enviarDatos();
-      }
+
+    var numeroPasos = (this.idJuicio() !== 1) ? (this.documentoSelected().clave.length) + 5 : 
+      ( (this.idJuicio() === 1 && this.idDocumento() === 7 ) ? ((this.documentoSelected().clave.length) + 3) : 
+      ((this.documentoSelected().clave.length) + 4) )
+    
+    if(numeroPasos === this.actualStep ){
+      //if (!this.mainForm.valid) { // Marca todos los campos como tocados para mostrar los errores
+      //  this.datosFaltantes = true;
+      //}
+      //else{
+      //  this.datosFaltantes = false;
+      //  this.enviarDatos();
+      //}
+      this.enviarDatos();
     }
     else{
       this.actualStep +=1
@@ -275,7 +299,7 @@ export class Inicio {
         console.log('Datos recibidos:', this.juiciosResponse()[0].nombreJuicio);
       },
       error: (error) => {
-        console.error('Error en la llamada:', error);
+        console.error('Error en llamada:', error.error, error);
       }
     });
   }
@@ -288,7 +312,7 @@ export class Inicio {
         console.log('Datos recibidos:', this.documentosResponse()[0].nombreDocumento);
       },
       error: (error) => {
-        console.error('Error en la llamada:', error);
+        console.error('Error en la llamada:', error.message, error);
       }
     });
   }
@@ -312,7 +336,7 @@ export class Inicio {
         });
       },
       error: (error) => {
-        console.error('Error en la llamada:', error);
+        console.error('Error en la llamada:', error, error.message);
       }
     });
   }

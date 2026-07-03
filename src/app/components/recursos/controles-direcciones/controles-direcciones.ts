@@ -24,11 +24,10 @@ export class ControlesDirecciones implements OnInit {
     this.api.getInfo('/CatEstados').subscribe({
       next: (response) => {
         this.estadosResponse.set(response)    
-        console.log(response);  
-        console.log(this.estadosResponse()[0].id + ' - ' + this.estadosResponse()[0].nombreEstado);  
+        console.log(response);
       },
       error: (error) => {
-        console.error('Error en la llamada:', error);
+        console.error('Error en la llamada:', error.message, error);
       }
     });
   }

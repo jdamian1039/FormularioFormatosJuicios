@@ -4,15 +4,25 @@ button {
     padding: 8px;
 }
 
+.logo {
+    width: 3.5em;
+    height: auto;
+    margin: 0 0.5em 0 0em
+}
+
+.banner{
+    color: white;
+}
+
 select{
-    border-width: 1px;
+    border-width: 0px;
     border-radius: 3px;
     padding: 3px;
     height: 2em;
 }
 
 input[type="text"], input[type="number"], input[type="date"], input[type="email"] {
-    border-width: 1px;
+    border-width: 0px;
     border-radius: 3px;
     padding: 3px;
     padding-left: 1em;
@@ -40,6 +50,6 @@ input[type="text"], input[type="number"], input[type="date"], input[type="email"
 }
 
 .scrolling-element {
-    height: 69vh; /* Ajusta este valor según tus necesidades */
+    height: 60vh; /* Ajusta este valor según tus necesidades */
     overflow-y: auto;
 }

@@ -1,5 +1,7 @@
-import { Component, output, signal, Input } from '@angular/core';
+import { Component, output, signal, Input, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { ApiConexion } from '../../../services/api-conexion';
+import { Impuesto } from '../../interfaces/impuesto.interface';
 
 @Component({
   selector: 'app-controles-impuestos',
@@ -7,9 +9,11 @@ import { ReactiveFormsModule, FormGroup } from '@angular/forms';
   templateUrl: './controles-impuestos.html',
   styleUrl: './controles-impuestos.css',
 })
-export class ControlesImpuestos {
+export class ControlesImpuestos implements OnInit {
 
   @Input() formGroup!: FormGroup
+  private api = inject(ApiConexion)
+  impuestosResponse = signal<Impuesto[]>([])
 
   nombreImpuesto = signal<string>('Default')
   valorImpuesto = signal<string>('Default')
@@ -17,9 +21,20 @@ export class ControlesImpuestos {
   nombreSignal = output<string>()
   valorSignal = output<string>()
 
-  enviarImpuesto(): void {
-    this.nombreSignal.emit(this.nombreImpuesto())
-    this.valorSignal.emit(this.valorImpuesto())
-    console.log('se emiten ambos valores')
+
+  ngOnInit() {
+    this.obtenerImpuesto();
+  }
+
+  obtenerImpuesto(): void {
+    this.api.getInfo('/CatImpuestosInmuebles').subscribe({
+      next: (response) => {
+        this.impuestosResponse.set(response);
+        console.log(response);
+      },
+      error: (error) => {
+        console.error('Error en la llamada:', error);
+      }
+    });
   }
 }

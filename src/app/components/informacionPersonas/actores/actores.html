@@ -9,15 +9,17 @@
                 </div>
             }
         </div>
-        <div class="container interfaz-botones-h">
-            <div class="row justify-content-md-center justify-content-sm-center">
-                <div class="col interfaz-botones-h">
-                    <button class="w-100 bg-success" (click)="agregarPersona()">Añadir Persona</button>
-                </div>
-                <div class="col interfaz-botones-h">
-                    <button class="w-100 bg-danger" (click)="quitarPersona()">Quitar Persona</button>
+        @if(this.iDocumento() !== 2){
+            <div class="container interfaz-botones-h">
+                <div class="row justify-content-md-center justify-content-sm-center">
+                    <div class="col interfaz-botones-h">
+                        <button class="w-100 bg-success" (click)="agregarPersona()">Añadir Persona</button>
+                    </div>
+                    <div class="col interfaz-botones-h">
+                        <button class="w-100 bg-danger" (click)="quitarPersona()">Quitar Persona</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
 </div>

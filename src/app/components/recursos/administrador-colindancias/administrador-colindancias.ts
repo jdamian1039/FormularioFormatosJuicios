@@ -31,6 +31,8 @@ export class AdministradorColindancias implements OnInit {
         id : 1,
         medida : 0.0,
         nombreColindante: '',
+        esDomicilio: false,
+        finado: false,
         nuevoColindante: ''
       }
     ]
@@ -56,25 +58,14 @@ export class AdministradorColindancias implements OnInit {
   }
   
   agregarColindancia(){
-    //if(this.colindancias()[this.colindancias().length-1].medida == 0 || 
-    //this.colindancias()[this.colindancias().length-1].nombreColindante == ''){
-    //  console.log(this.colindancias())
-    //  return;
-    //}
-    //else{
-    //  const nuevoColindante: Colindancia = {
-    //    id: this.colindancias().length + 1,
-    //    medida: 0.0,
-    //    nombreColindante: '',
-    //    nuevoColindante: '',
-    //  }
-    //  this.colindancias.update((list) => [...list, nuevoColindante])
-    //}
+    
     var longitud = this.colindancia.length - 1
     if(this.colindancia.value[longitud].medida !== 0 || this.colindancia.value[longitud].colindante !== ''){
       const nuevaColindancia = new FormGroup({
         medida: new FormControl(0, Validators.required),
         colindante: new FormControl('', Validators.required),
+        esDomicilio: new FormControl(false, Validators.required),
+        primeraLineaDomicilio: new FormControl(''),
         finado: new FormControl(false),
         nuevoColindante: new FormControl('')
       });
@@ -83,14 +74,7 @@ export class AdministradorColindancias implements OnInit {
   }
 
   quitarColindancia(){
-    //if(this.colindancias().length === 1){
-    //  console.log(this.colindancias().length)
-    //}
-    //else{
-    //  const nuevoArreglo = this.colindancias()
-    //  nuevoArreglo.splice(this.colindancias().length - 1, 1)
-    //  this.colindancias.set(nuevoArreglo)
-    //}
+    
     if (this.colindancia.length > 1) {
       this.colindancia.removeAt(this.colindancia.length - 1);
     }

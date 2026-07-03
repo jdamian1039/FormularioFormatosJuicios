@@ -20,16 +20,32 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <label class="m-2 col-md-auto">Finado:</label>
-            <input id="finado" type="checkbox" name="finado" value="Si" class="m-2" (change)="toggleMostrar($event)" formControlName="finado">
+            <label class="m-2 col-md-auto">¿El colindante es un domicilio? Marque la casilla de ser asi. Si se trata de una calle, edificio de gobierno u otro tipo de instancia deje sin marcar</label>
+            <input id="esDomicilio" type="checkbox" name="esDomicilio" value="Si" class="m-2" formControlName="esDomicilio" (change)="toggleEsDomicilio($event)">
         </div>
     </div>
-    <div class="row" [hidden]="!mostrarCampo">
-        <div class="col-12">
-            <div class="row">
-                <label class="m-2 col-md-auto col-sm-12">Nombre completo colindante actual</label>
-                <input id="nuevoColindante" type="text" oninput="this.value = this.value.toUpperCase()" name="nuevoColindante" class="m-2 col w-100" formControlName="nuevoColindante">
-                <!--[value]="nuevoColindante()" (change)="nuevoColindante.set(txtNuevo.value)" (change)="enviarColindancia()" #txtNuevo formControlName="nuevoColindante" -->
+    <div class="row" [hidden]="!mostrarCamposDomicilio">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <label class="m-2 col-md-auto col-sm-12">Domicilio de notificación del colindante:</label>
+                    <input id="primeraLineaDomicilio" type="text" placeholder="No incluir Municipio ni Estado" oninput="this.value = this.value.toUpperCase()" name="primeraLineaDomicilio" class="m-2 col w-100" formControlName="primeraLineaDomicilio">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label class="m-2 col-md-auto">¿Finado?</label>
+                <input id="finado" type="checkbox" name="finado" value="Si" class="m-2" (change)="toggleMostrarNuevoColindante($event)" formControlName="finado">
+            </div>
+        </div>
+        <div class="row" [hidden]="!mostrarCampoColindante">
+            <div class="col-12">
+                <div class="row">
+                    <label class="m-2 col-md-auto col-sm-12">Nombre completo colindante actual</label>
+                    <input id="nuevoColindante" type="text" oninput="this.value = this.value.toUpperCase()" name="nuevoColindante" class="m-2 col w-100" formControlName="nuevoColindante">
+                    <!--[value]="nuevoColindante()" (change)="nuevoColindante.set(txtNuevo.value)" (change)="enviarColindancia()" #txtNuevo formControlName="nuevoColindante" -->
+                </div>
             </div>
         </div>
     </div>

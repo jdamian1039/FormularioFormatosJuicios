@@ -25,6 +25,12 @@
                 }
             </select>
         </div>
+        @if(this.idDocumento() === 7){
+            <div class="row">
+                <label for="fecha-audiencia" class="m-2 col-lg-6 col-md-12 col-sm-12">Fecha y hora de la Audiencia</label>
+                <input type="datetime-local" name="fecha-audiencia" id="fecha-audiencia" class="m-2 col w-100" formControlName="fechaAudiencia">
+            </div>
+        }
     </div>
 </div>
 

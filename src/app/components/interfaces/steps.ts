@@ -94,6 +94,7 @@ export interface Step9 {
   centavos: number,
   localidad: string,
   municipio: string,
+  ejercicioFiscal: string,
   impuestos: ImpuestoItem[]
 }
 

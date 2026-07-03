@@ -2,6 +2,14 @@
     <div>
         <h2 class="mb-4">Datos de Compraventa del Inmueble</h2>
         <div class="bg-primary-subtle p-5">
+            @if(this.idFormulario() ===  7){
+                <div class="container mb-5">
+                    <label for="" class="m-2 col-sm-12">Datos generales sobre el vendedor del Inmueble</label>
+                    <div class="row" >
+                        <app-controles-personas [formGroup] = "comprador"/>
+                    </div>
+                </div>
+            }
             <div class="container">
                 <div class="row">
                     <label for="fecha-compraventa" class="m-2 col-lg-6 col-md-12 col-sm-12">Fecha de celebración del contrato de compraventa</label>
@@ -27,6 +35,12 @@
                 <div class="row">
                     <label for="" class="m-2 col-sm-12">Impuestos pagados que acreditan al actor como propietario del inmueble</label>
                 </div>
+                @if(this.idFormulario() === 1){
+                    <div class="row">
+                        <label for="ejercicio-fiscal" class="m-2 col-lg-6 col-md-12 col-sm-12">Ultimo año del ejercicio fiscal en que se realizó el pago de Impuesto Predial</label>
+                        <input id="ejercicio-fiscal" type="text" oninput="this.value = this.value.toUpperCase()" name="ejercicioFiscal" class="m-2 col w-100" formControlName="ejercicioFiscal">
+                    </div>
+                }
                 @if(this.tipoFormulario() === "IV" || this.tipoFormulario() === "IVT") {
                     <div class="row">
                         <label for="localidad-domicilio" class="m-2 col-lg-6 col-md-12 col-sm-12">Localidad del Inmueble</label>

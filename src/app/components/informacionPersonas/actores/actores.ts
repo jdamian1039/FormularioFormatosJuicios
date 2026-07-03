@@ -1,4 +1,4 @@
-import { Component, signal, Input, OnInit } from '@angular/core';
+import { Component, signal, Input, OnInit, input } from '@angular/core';
 import { ControlesPersonas } from '../../recursos/controles-personas/controles-personas';
 import { Persona } from '../../interfaces/persona.interfaces';
 import { ReactiveFormsModule, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
@@ -14,6 +14,7 @@ export class Actores implements OnInit {
   
   @Input() step3Form!: FormGroup
   actores!: FormArray;
+  iDocumento = input.required<number>()
 
   ngOnInit() {
     this.actores = this.step3Form.get('actores') as FormArray
