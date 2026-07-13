@@ -10,6 +10,8 @@ import { ReactiveFormsModule, FormGroup } from '@angular/forms';
 export class ControlesColindancias {
 
   @Input() formGroup!: FormGroup
+
+  idDocumento = input.required<number>()
   
   public medida = signal<number>(0.0)
   public colindante = signal<string>('')

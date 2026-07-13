@@ -19,7 +19,7 @@ import { FormField } from "@angular/forms/signals";
 @Component({
   selector: 'app-inicio',
   imports: [InformacionGeneralJuicios, Actores, Demandados, InformacionAbogado, DireccionInmueble, Testigos,
-    ColindanciaInmueble, InscripcionInmueble, InformacionCompraventaInmueble, ReactiveFormsModule, JsonPipe],
+    ColindanciaInmueble, InscripcionInmueble, InformacionCompraventaInmueble, ReactiveFormsModule, JsonPipe, FormField],
   templateUrl: './inicio.html',
   styleUrl: './inicio.css',
 })
@@ -318,13 +318,16 @@ export class Inicio {
   }
 
   enviarDatos(){
+    console.log('FormDataFile:', this.mainForm.value);
     this.api.postInfo('Expediente/procesar-documento', this.mainForm.value).subscribe({
       next: (response) => {
         console.log(response);
-        console.log('URL de OneDrive:', response.url);
-        console.log('Nombre del archivo:', response.resultado.fileDownloadName);
-        console.log('Tipo de contenido:', response.resultado.contentType);
-        console.log('Contenido del archivo (Base64):', response.resultado.fileContents);
+        this.consultarRegistros()
+        console.log('URL OneDrive:', response.url);
+        console.log('Nombre:', response.resultado.fileDownloadName);
+        console.log('Contenido:', response.resultado.contentType);
+        console.log('Contenido B64:', response.resultado.fileContents);
+
         // 👈 REDIRECCIÓN MÁGICA: Nos movemos a la ruta '/resultado' pasándole los datos ocultos
         this.router.navigate(['/documento_exitoso'], {
           state: {
@@ -336,9 +339,67 @@ export class Inicio {
         });
       },
       error: (error) => {
-        console.error('Error en la llamada:', error, error.message);
+        console.error('Error en la llamada:', error);
+        console.error('Error en la llamada:', error.message);
       }
     });
+  }
+
+  consultarRegistros(){
+    this.api.getInfo('/JuicioInterno/' + 12).subscribe({
+      next: (response) => {
+        console.log('Consulta realizada:', response);
+      },
+      error: (error) => {
+        console.error('Error en la llamada:', error.error.status);
+        console.error('Error en la llamada:', error);
+        if (error.error && error.error.status === 404) {
+          this.crearExpediente();
+        }
+      }
+    });
+  }
+
+  crearExpediente(){
+    const data = {
+      id: this.mainForm.value.step1?.expedienteInterno,
+      idTipoJuicio: this.idJuicio(),
+      parteActora: '',
+      parteDemandada: '',
+      abogado: '',
+      fechaInicio: new Date().toISOString(), 
+    }
+      
+    this.api.postInfo('JuicioInterno', data).subscribe({
+      next: (response) => {
+        console.log('Expediente creado:', response);
+        this.crearDocumento();
+      },
+      error: (error) => {
+        console.error('Error al crear expediente:', error);
+        console.error('Error al crear expediente:', error.message);
+        console.error('Error al crear expediente:', error.error.status);
+      }
+    })
+  }
+
+  crearDocumento(){
+    const data = {
+      idExpedienteInterno: this.mainForm.value.step1?.expedienteInterno,
+      idTipoDocumento: this.idDocumento(),
+      fechaCreacion: new Date().toISOString(),
+    }
+    console.log('FormDataDocument:', data);
+    this.api.postInfo('DocumentosGenerados', data).subscribe({
+      next: (response) => {
+        console.log('Documento creado:', response);
+      },
+      error: (error) => {
+        console.error('Error al crear documento:', error);
+        console.error('Error al crear documento:', error.message);
+        console.error('Error al crear documento:', error.error.status);
+      }
+    })
   }
 
   enviarId(juicio:CatJuicio){

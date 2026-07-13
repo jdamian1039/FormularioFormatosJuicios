@@ -19,10 +19,12 @@
                 <label for="folio-electronico" class="m-2 col-lg-6 col-md-12 col-sm-12">Folio Electrónico Real</label>
                 <input id="folio-electronico" type="text" oninput="this.value = this.value.toUpperCase()" name="folio-electronico" class="m-2 col" formControlName="folioElectronico">
             </div>
-            <div class="row">
-                <label for="titular" class="m-2 col-lg-6 col-md-12 col-sm-12">Codemandado propietario del Inmueble en el IFR del Estado de México</label>
-                <input type="text" name="titular" oninput="this.value = this.value.toUpperCase()" id="titular" class="m-2 col" formControlName="codemandadoDominio" placeholder="Nombre(s) y Apellidos del Codemandado">
-            </div>
+            @if (this.idDocumento() >= 8){
+                <div class="row">
+                    <label for="titular" class="m-2 col-lg-6 col-md-12 col-sm-12">Codemandado propietario del Inmueble en el IFR del Estado de México</label>
+                    <input type="text" name="titular" oninput="this.value = this.value.toUpperCase()" id="titular" class="m-2 col" formControlName="codemandadoDominio" placeholder="Nombre(s) y Apellidos del Codemandado">
+                </div>
+            }
             @if (this.idDocumento() >= 18 && this.idDocumento() <= 27) 
             {
                 <div class="row">
@@ -30,14 +32,16 @@
                     <input type="text" name="titular" oninput="this.value = this.value.toUpperCase()" id="titular" class="m-2 col" formControlName="codemandadoCausante" placeholder="Nombre(s) y Apellidos del Codemandado">
                 </div>
             }
-            <div class="row">
-                <label for="oficina-reg" class="m-2 col-lg-6 col-md-12 col-sm-12">Tildación de la inscripcion del dominio del inmueble</label>
-                <select name="titulo" id="oficina-reg" class="m-2 col w-100" formControlName="tildacion">
-                    <option value="" selected >Selecciona una opción</option>
-                    <option value="TOTAL">Total</option>
-                    <option value="PARCIAL">Parcial</option>
-                </select>
-            </div>
+            @if (this.idDocumento() >= 8){
+                <div class="row">
+                    <label for="oficina-reg" class="m-2 col-lg-6 col-md-12 col-sm-12">Tildación de la inscripcion del dominio del inmueble</label>
+                    <select name="titulo" id="oficina-reg" class="m-2 col w-100" formControlName="tildacion">
+                        <option value="" selected >Selecciona una opción</option>
+                        <option value="TOTAL">Total</option>
+                        <option value="PARCIAL">Parcial</option>
+                    </select>
+                </div>
+            }
         </div>
     </div>
 </div>

@@ -78,7 +78,7 @@
         @if ((actualStep === 5 +  (this.documentoSelected().clave.indexOf('C') + 1) && this.idJuicio() !== 1) || 
         (this.idJuicio() === 1 && actualStep === 3 + (this.documentoSelected().clave.indexOf('C') + 1 )) ) {
             <div class="mt-3 ml-3 mr-3 pt-2 pl-2 pr-2 scrolling-element">
-                <app-colindancia-inmueble [step7Form]="step7"  />
+                <app-colindancia-inmueble [step7Form]="step7" [idDocumento]="this.idDocumento()" />
             </div>
         }
     }
@@ -129,6 +129,9 @@
             } 
             <div class="col-md-3 col-sm-12">
                 <button class="w-100" (click)="nextStep()" id="botonEnvio">Continuar</button>
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <button class="w-100" (click)="consultarRegistros()" >Prueba</button>
             </div>
             
         </div>

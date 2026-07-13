@@ -1,0 +1,50 @@
+<h1>Subir Archivo a One Drive</h1>
+<form [formGroup]="mainForm" action="" >
+    <div class="mt-4 ml-4 mr-4 pt-2 pl-2 pr-2 scrolling-element">
+        <div class="p-5">
+            <h2 class="mb-4">Cargue el archivo que desea subir al expediente digital</h2>
+            <div class="bg-primary-subtle p-5" >
+                <div class="container">
+                    <div class="row">
+                        <label for="" class="m-2 col-sm-12 col-lg-6 col-lg-6">Indique el número de expediente interno:</label>
+                        <input type="text" class="m-2 col" formControlName="expediente" >
+                    </div>
+                    <div class="row">
+                        <label for="" class="m-2 col-sm-12 col-lg-6 col-lg-6">Seleccione un archivo para subir:</label>
+                        <input type="file" accept=".pdf, .docx" class="m-2 col" id="archivo" (change)="onFileSelected($event)"  >
+                    </div>
+                    <div class="row">
+                        <label for="tipo-juicio" class="m-2 col-lg-6 col-md-12 col-sm-12">Seleccione el Juicio al que pertenece:</label>
+                        <select [value]="this.juiciosResponse()" name="juicio" id="tipo-juicio" class="m-2 col w-100" 
+                        (change)="enviarId(this.juiciosResponse()[txtJuicio.selectedIndex -1])" #txtJuicio 
+                        formControlName="juicio">
+                            <option value="" selected>Selecciona una opción</option>
+                            @for (juicio of juiciosResponse(); track $index) {
+                                <option [value]="juicio.id">{{juicio.nombreJuicio}}</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="row">
+                        <label for="tipo-documento" class="m-2 col-lg-6 col-md-12 col-sm-12">Seleccione el documento al que se hace referencia:</label>
+                        <select [value]="this.documentosResponse()" name="documento" id="tipo-documento" class="m-2 col w-100" 
+                        (change)="seleccionarDocumento(this.documentosResponse()[txtDoc.selectedIndex -1])" #txtDoc
+                        formControlName="documento">
+                            <option value="" selected>Selecciona una opción</option>
+                            @for (item of this.documentosResponse(); track $index) {
+                                <option [value]="item.id">{{item.nombreDocumento}}</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container interfaz-botones-h">
+        <div class="row">    
+            <div class="col-md-3 col-sm-12">
+                <button class="w-100" (click)="enviarFormulario()" id="botonEnvio">Continuar</button>
+            </div>
+            
+        </div>
+    </div>
+</form>

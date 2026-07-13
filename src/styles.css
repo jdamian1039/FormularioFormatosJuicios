@@ -53,3 +53,16 @@ input[type="text"], input[type="number"], input[type="date"], input[type="email"
     height: 60vh; /* Ajusta este valor según tus necesidades */
     overflow-y: auto;
 }
+.fa-regular {
+    font-size: 3.5em;
+    color: #007bff;
+    margin: 10px 0px 10px 0px;
+}
+
+
+.option-menu{
+    display:grid;
+    align-items: center;
+    justify-items: center;
+}
+

@@ -1,16 +1,26 @@
 import { Routes } from '@angular/router';
 import { Inicio } from './components/informacionJuicios/inicio/inicio';
 import { RespuestaDocumentosGenerados } from './components/respuestas/respuesta-documentos-generados/respuesta-documentos-generados';
+import { MenuPrincipal } from './components/sections/menu-principal/menu-principal';
+import { SubirArchivos } from './components/sections/subir-archivos/subir-archivos';
 
 export const routes: Routes = [
     {
         path:'',
+        component: MenuPrincipal
+    },
+    {
+        path:'generar_documentos',
         component: Inicio
     },
     {
         path:'documento_exitoso',
         component: RespuestaDocumentosGenerados
     },
+    {
+        path:'subir_archivo',
+        component: SubirArchivos
+    }
     //{
     //    path:'personas/parte_actora',
     //    component: Actores

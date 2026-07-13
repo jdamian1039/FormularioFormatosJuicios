@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, signal, input } from '@angular/core';
 import { Colindancia } from '../../interfaces/colindancia.interface';
 import { AdministradorColindancias } from '../../recursos/administrador-colindancias/administrador-colindancias';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +12,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class ColindanciaInmueble {
   
   @Input() step7Form!: FormGroup
+  idDocumento = input.required<number>()
 
   get colindanciaNorteGroup() { return this.step7Form.get('colindanciasNorte') as FormGroup; }
   get colindanciaSurGroup() { return this.step7Form.get('colindanciasSur') as FormGroup; }

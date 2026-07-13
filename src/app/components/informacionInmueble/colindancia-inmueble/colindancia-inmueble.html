@@ -3,13 +3,17 @@
         <h2 class="mb-4">Colindancias del inmueble</h2>
         <div class="bg-primary-subtle p-5">
             <h5 class="mb-3">Colindancia al NORTE del inmueble</h5>
-            <app-administrador-colindancias (envioColindancia)="recibirColindanciaN($event)" [colindanciaGroup]="colindanciaNorteGroup" />
+            <app-administrador-colindancias (envioColindancia)="recibirColindanciaN($event)" 
+            [colindanciaGroup]="colindanciaNorteGroup" [idDocumento]="this.idDocumento()" />
             <h5 class="mb-3 mt-5">Colindancia al SUR del inmueble</h5>
-            <app-administrador-colindancias (envioColindancia)="recibirColindanciaS($event)" [colindanciaGroup]="colindanciaSurGroup" />
+            <app-administrador-colindancias (envioColindancia)="recibirColindanciaS($event)" 
+            [colindanciaGroup]="colindanciaSurGroup" [idDocumento]="this.idDocumento()" />
             <h5 class="mb-3 mt-5">Colindancia al ORIENTE del inmueble</h5>
-            <app-administrador-colindancias (envioColindancia)="recibirColindanciaE($event)" [colindanciaGroup]="colindanciaEsteGroup" />
+            <app-administrador-colindancias (envioColindancia)="recibirColindanciaE($event)" 
+            [colindanciaGroup]="colindanciaEsteGroup" [idDocumento]="this.idDocumento()" />
             <h5 class="mb-3 mt-5">Colindancia al PONIENTE del inmueble</h5>
-            <app-administrador-colindancias (envioColindancia)="recibirColindanciaO($event)" [colindanciaGroup]="colindanciaOesteGroup" />
+            <app-administrador-colindancias (envioColindancia)="recibirColindanciaO($event)" 
+            [colindanciaGroup]="colindanciaOesteGroup" [idDocumento]="this.idDocumento()" />
         </div>
     </div>
 </div>

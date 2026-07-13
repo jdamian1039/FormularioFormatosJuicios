@@ -5,12 +5,14 @@
   <hr>
 
   <div class="my-4">
-    <a [href]="oneDriveUrl()" target="_blank" class="btn btn-outline-success btn-lg me-3">
+    <a [href]="oneDriveUrl()" target="_blank" class="btn btn-outline-success btn-lg me-3 mb-2">
       📁 Abrir en OneDrive
     </a>
-
-    <button (click)="descargarArchivoDesdeNavegador()" class="btn btn-primary btn-lg">
-      ⬇️ Descargar en este Equipo
-    </button>
+    @if(this.fileContentsBase64() !== null) {
+      <button (click)="descargarArchivoDesdeNavegador()" class="btn btn-primary btn-lg mb-2">
+        ⬇️ Descargar en este Equipo
+      </button>
+      
+    }
   </div>
 </div>

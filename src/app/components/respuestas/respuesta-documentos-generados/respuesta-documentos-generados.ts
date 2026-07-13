@@ -12,7 +12,7 @@ export class RespuestaDocumentosGenerados implements OnInit {
 
   // Guardaremos los datos que pasamos desde la pantalla anterior
   oneDriveUrl = signal<string>('');
-  private fileContentsBase64 = '';
+  fileContentsBase64 = signal<string>('');
   private fileName = '';
   private contentType = '';
 
@@ -23,7 +23,7 @@ export class RespuestaDocumentosGenerados implements OnInit {
     console.log('Estado recibido en RespuestaDocumentosGenerados:', state);
     if (state) {
       this.oneDriveUrl.set(state.url);
-      this.fileContentsBase64 = state.fileContents;
+      this.fileContentsBase64.set(state.fileContents);
       this.fileName = state.name;
       this.contentType = state.type;
     } 
@@ -35,7 +35,7 @@ export class RespuestaDocumentosGenerados implements OnInit {
 
   descargarArchivoDesdeNavegador() {
     // 1. Convertir el string Base64 que mandó C# a un array de bytes (Uint8Array)
-    const byteCharacters = atob(this.fileContentsBase64);
+    const byteCharacters = atob(this.fileContentsBase64());
     const byteNumbers = new Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {
       byteNumbers[i] = byteCharacters.charCodeAt(i);

@@ -3,7 +3,8 @@
         @for (item of colindancia.controls; track $index) {
             <div [formGroupName]="$index">
                 <app-controles-colindancias [numeroColindancia]="$index + 1" 
-                [formGroup]="getColindanciaFormGroup($index)" />
+                [formGroup]="getColindanciaFormGroup($index)"
+                [idDocumento]="this.idDocumento()" />
             </div>
         }
     </div>

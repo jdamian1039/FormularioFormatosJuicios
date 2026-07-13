@@ -1,4 +1,4 @@
-import { Component, signal, output, Input, OnInit } from '@angular/core';
+import { Component, signal, output, Input, OnInit, input } from '@angular/core';
 import { ControlesColindancias } from '../controles-colindancias/controles-colindancias';
 import { Colindancia } from '../../interfaces/colindancia.interface';
 import { ReactiveFormsModule, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
@@ -12,6 +12,9 @@ import { ReactiveFormsModule, FormGroup, FormArray, FormControl, Validators } fr
 export class AdministradorColindancias implements OnInit {
 
   @Input() colindanciaGroup!: FormGroup
+
+  idDocumento = input.required<number>()
+
   colindancia!: FormArray
 
   ngOnInit() {
