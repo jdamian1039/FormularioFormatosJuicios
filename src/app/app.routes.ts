@@ -3,6 +3,7 @@ import { Inicio } from './components/informacionJuicios/inicio/inicio';
 import { RespuestaDocumentosGenerados } from './components/respuestas/respuesta-documentos-generados/respuesta-documentos-generados';
 import { MenuPrincipal } from './components/sections/menu-principal/menu-principal';
 import { SubirArchivos } from './components/sections/subir-archivos/subir-archivos';
+import { BuscarExpedientes } from './components/sections/buscar-expedientes/buscar-expedientes';
 
 export const routes: Routes = [
     {
@@ -20,11 +21,11 @@ export const routes: Routes = [
     {
         path:'subir_archivo',
         component: SubirArchivos
-    }
-    //{
-    //    path:'personas/parte_actora',
-    //    component: Actores
-    //},
+    },
+    {
+        path:'consultar_expedientes',
+        component: BuscarExpedientes
+    },
     //{
     //    path:'personas/parte_demandada',
     //    component: Demandados

@@ -11,10 +11,7 @@ export class MenuPrincipal {
   constructor(private router: Router){
     
   }
-  goRoute(){
-    this.router.navigate(['/generar_documentos']);
-  }
-  goRoute1(){
-    this.router.navigate(['/subir_archivo']);
+  goRoute(ruta: string){
+    this.router.navigate([ruta]);
   }
 }

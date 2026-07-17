@@ -90,6 +90,7 @@ export class SubirArchivos {
     this.api.postInfo('SubirDocumento/subirDocumento', formData).subscribe({
       next: (response) => {
         console.log('¡Archivo y datos subidos con éxito!', response);
+        this.consultarRegistros(response.url);
         this.router.navigate(['/documento_exitoso'], {
           state: {
             url: response.url,                                      // El link de OneDrive
@@ -133,5 +134,63 @@ export class SubirArchivos {
         console.error('Error en la llamada:', error.message, error);
       }
     });
+  }
+
+  consultarRegistros(url:string){
+    this.api.getInfo('/JuicioInterno/' + this.mainForm.value.expediente).subscribe({
+      next: (response) => {
+        console.log('Consulta realizada:', response);
+      },
+      error: (error) => {
+        console.error('Error en la llamada:', error.error.status);
+        console.error('Error en la llamada:', error);
+        if (error.error && error.error.status === 404) {
+          this.crearExpediente(url);
+        }
+      }
+    });
+  }
+
+  crearExpediente(url: string){
+    const data = {
+      id: this.mainForm.value.expediente,
+      idTipoJuicio: this.idJuicio(),
+      parteActora: '',
+      parteDemandada: '',
+      abogado: '',
+      fechaInicio: new Date().toISOString(), 
+    }
+    console.log('FormDataExpediente:', data);
+    this.api.postInfo('JuicioInterno', data).subscribe({
+      next: (response) => {
+        console.log('Expediente creado:', response);
+        this.crearDocumento(url);
+      },
+      error: (error) => {
+        console.error('Error al crear expediente:', error);
+        console.error('Error al crear expediente:', error.message);
+        console.error('Error al crear expediente:', error.error.status);
+      }
+    })
+  }
+
+  crearDocumento(url: string){
+    const data = {
+      idExpedienteInterno: this.mainForm.value.expediente,
+      idTipoDocumento: this.mainForm.value.documento,
+      fechaCreacion: new Date().toISOString(),
+      urlDocumento: url, // Aquí puedes asignar la URL del documento generado si la tienes
+    }
+    console.log('FormDataDocument:', data);
+    this.api.postInfo('DocumentosGenerados', data).subscribe({
+      next: (response) => {
+        console.log('Documento creado:', response);
+      },
+      error: (error) => {
+        console.error('Error al crear documento:', error);
+        console.error('Error al crear documento:', error.message);
+        console.error('Error al crear documento:', error.error.status);
+      }
+    })
   }
 }

@@ -8,12 +8,7 @@
     color: white;
 }
 
-.btn-menu:hover .fa-regular{
-    color: white;
-    cursor: pointer;
-}
-
-.btn-menu:hover .fa-solid{
+.btn-menu:hover .fa-solid:hover{
     color: white;
     cursor: pointer;
 }

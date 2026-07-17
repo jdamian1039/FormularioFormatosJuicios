@@ -1,0 +1,43 @@
+<h1>Consulta de Expedientes</h1>
+<div class="mt-4 ml-4 mr-4 pt-2 pl-2 pr-2 scrolling-element">
+    <div class="p-5">
+        <h2 class="mb-4">Ingrese el número de Expediente</h2>
+        <div class="bg-primary-subtle p-5" >
+            <div class="container">
+                <div class="row">
+                    <input type="number" class="m-2 col-lg-8 col-md-8 col-sm-12" placeholder="Ingrese Numero de Expediente" (change)="sendData($event)">
+                    <button class="btn btn-primary m-2 col w-100 " (click)="this.buscarExpediente()">Buscar</button>
+                </div>
+            </div>
+            <div class="container">
+                @if(this.documentos().length > 0){
+                    <div class="m-5" style="border-bottom: 1px solid #007bff"></div>
+                    <table  class="table ">
+                        <thead>
+                            <tr>
+                                <th class="bg-primary-subtle" scope="col">Índice</th>
+                                <th class="bg-primary-subtle" scope = "col">Documento</th>
+                                <th class="bg-primary-subtle" scope = "col">Fecha</th>
+                                <th class="bg-primary-subtle" scope = "col">Hora</th>
+                                <th class="bg-primary-subtle" scope = "col">Ver</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (item of this.documentos(); track item.fechaCreacion) {
+                                <tr>
+                                    <th class="bg-primary-subtle" scope="row">{{$index + 1}}</th>
+                                    <td class="bg-primary-subtle">{{item.nombreDocumento}}</td>
+                                    <td class="bg-primary-subtle">{{item.dia}}</td>
+                                    <td class="bg-primary-subtle">{{item.hora}}</td>
+                                    <td class="bg-primary-subtle">
+                                        <a [href]="item.url" class="btn">>></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>

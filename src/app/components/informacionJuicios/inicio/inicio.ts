@@ -322,7 +322,7 @@ export class Inicio {
     this.api.postInfo('Expediente/procesar-documento', this.mainForm.value).subscribe({
       next: (response) => {
         console.log(response);
-        this.consultarRegistros()
+        this.consultarRegistros(response.url);
         console.log('URL OneDrive:', response.url);
         console.log('Nombre:', response.resultado.fileDownloadName);
         console.log('Contenido:', response.resultado.contentType);
@@ -345,8 +345,8 @@ export class Inicio {
     });
   }
 
-  consultarRegistros(){
-    this.api.getInfo('/JuicioInterno/' + 12).subscribe({
+  consultarRegistros(url:string){
+    this.api.getInfo('/JuicioInterno/' + this.mainForm.value.step1?.expedienteInterno).subscribe({
       next: (response) => {
         console.log('Consulta realizada:', response);
       },
@@ -354,13 +354,13 @@ export class Inicio {
         console.error('Error en la llamada:', error.error.status);
         console.error('Error en la llamada:', error);
         if (error.error && error.error.status === 404) {
-          this.crearExpediente();
+          this.crearExpediente(url);
         }
       }
     });
   }
 
-  crearExpediente(){
+  crearExpediente(url: string){
     const data = {
       id: this.mainForm.value.step1?.expedienteInterno,
       idTipoJuicio: this.idJuicio(),
@@ -369,11 +369,11 @@ export class Inicio {
       abogado: '',
       fechaInicio: new Date().toISOString(), 
     }
-      
+    console.log('FormDataExpediente:', data);
     this.api.postInfo('JuicioInterno', data).subscribe({
       next: (response) => {
         console.log('Expediente creado:', response);
-        this.crearDocumento();
+        this.crearDocumento(url);
       },
       error: (error) => {
         console.error('Error al crear expediente:', error);
@@ -383,11 +383,12 @@ export class Inicio {
     })
   }
 
-  crearDocumento(){
+  crearDocumento(url: string){
     const data = {
       idExpedienteInterno: this.mainForm.value.step1?.expedienteInterno,
       idTipoDocumento: this.idDocumento(),
       fechaCreacion: new Date().toISOString(),
+      urlDocumento: url, // Aquí puedes asignar la URL del documento generado si la tienes
     }
     console.log('FormDataDocument:', data);
     this.api.postInfo('DocumentosGenerados', data).subscribe({

@@ -2,25 +2,32 @@
 <div class="m-5"></div>
 <h6>Seleccione una opción:</h6>
 <div class="m-4">
-    <div class="container">
+    <div class="container  text-center">
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <a class="btn btn-menu" (click)="goRoute()">
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+                <a class="btn btn-menu w-100" (click)="goRoute('/generar_documentos')">
                     <div class="p-2 option-menu">
                         <i class="fa-regular fa-file"></i>
                         <label class="m-2">Generar un  Nuevo Archivo</label>
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <a class="btn btn-menu" (click)="goRoute1()">
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-2">
+                <a class="btn btn-menu w-100" (click)="goRoute('/subir_archivo')">
                     <div class="p-2 option-menu">
                         <i class="fa-regular fa-folder"></i>
                         <label class="m-2">Guardar Archivo en Expediente</label>
                     </div>
                 </a>
             </div>
-            
+            <div class="col-lg-3 col-md-4 col-sm-6  pb-2">
+                <a class="btn btn-menu w-100" (click)="goRoute('/consultar_expedientes')">
+                    <div class="p-2 option-menu">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <label class="m-2">Consultar Expedientes</label>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>
