@@ -37,6 +37,12 @@
                         </tbody>
                     </table>
                 }
+                @if(this.Code() === 404){
+                    <div class="container text-center">
+                        <div class="m-5" style="border-bottom: 1px solid #007bff"></div>
+                        <h3>No se encontraron resultados.</h3>
+                    </div>
+                }
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@ import { FormField } from "@angular/forms/signals";
 @Component({
   selector: 'app-inicio',
   imports: [InformacionGeneralJuicios, Actores, Demandados, InformacionAbogado, DireccionInmueble, Testigos,
-    ColindanciaInmueble, InscripcionInmueble, InformacionCompraventaInmueble, ReactiveFormsModule, JsonPipe, FormField],
+    ColindanciaInmueble, InscripcionInmueble, InformacionCompraventaInmueble, ReactiveFormsModule],
   templateUrl: './inicio.html',
   styleUrl: './inicio.css',
 })
